@@ -1,6 +1,6 @@
 # ROADMAP: Gauge
 
-Last updated: 2026-11-09T14:40Z (update Drips Wave 11 submission packet and sibling comparison)
+Last updated: 2026-11-19T08:28Z (test(sanitize): add TestDomainIDNMatrix and update Domain comment, task 7.28)
 Roadmap version: 3
 
 This file is the single source of truth for remaining work. It is read before every task and updated after every change.
@@ -40,7 +40,7 @@ The repository is 100% ready when every task in Phases 0 to 6 is done and every 
 | 4 | Dogfood and release v0.1.0 | 2 | 9 | 22% |
 | 5 | v0.2 features | 3 | 11 | 27% |
 | 6 | Release v0.2.0 and community | 0 | 5 | 0% |
-| 7 (backlog) | Backlog | 0 | 4 | 0% |
+| 7 (backlog) | Backlog | 1 | 5 | 20% |
 | **Phases 0 to 6** | **Readiness total** | **56** | **79** | **70%** |
 | Gates | G1 to G10 | 3 | 10 | 30% |
 <!-- PROGRESS:END -->
@@ -226,6 +226,7 @@ Constraint on the two remaining experimental tasks: Gauge never builds or submit
 - [ ] **7.2** Claimable balances, liquidity pool shares and sponsorship analysis.
 - [ ] **7.3** Alert integrations (probably never; JSON and CI cover it).
 - [ ] **7.4** Cross-check issued assets against `stellar.toml` currencies.
+- [x] **7.28** Pin the IDN flag semantics: the flag describes the sanitized output string, not the raw input, and punycode (xn--) is never decoded. S. Done when: `internal/sanitize/domain_test.go` adds `TestDomainIDNMatrix` over ASCII, punycode `xn--80ak6aa92e.com`, Cyrillic, mixed Latin-Cyrillic, tag-masked, bidi-masked and C1-masked hosts; each case asserts `idn` equals whether the returned string contains a rune above U+007F, computed from the output; tag-masked and bidi-masked hosts return an ASCII string with `false`, proving sanitization runs first; `go test ./internal/sanitize -run TestDomainIDNMatrix -race -count=1` passes and fails if `Domain` scans `s` instead of `d`; and the `Domain` comment states the flag follows sanitization and omits punycode. (done 2026-11-19: `internal/sanitize/domain_test.go` added with seven named cases; `internal/sanitize/domain.go` comment updated; `go test ./internal/sanitize -run TestDomainIDNMatrix -race -count=1` exits 0, all seven sub-tests pass; `go test ./... -race -count=1` exits 0 across all eleven packages; no IDNA dependency added.)
 
 ## 6. Dependency map (critical path)
 
@@ -276,6 +277,7 @@ Newest first. One row per merged change.
 
 | Date (UTC) | Change | Tasks |
 |---|---|---|
+| 2026-11-19 | test(sanitize): add `TestDomainIDNMatrix` in `internal/sanitize/domain_test.go` covering seven cases (ASCII, punycode xn--, Cyrillic, mixed Latin-Cyrillic, tag-masked, bidi-masked, C1-masked); update `Domain` comment in `domain.go` to state the flag follows sanitization and omits punycode. `go test ./internal/sanitize -run TestDomainIDNMatrix -race -count=1` and `go test ./... -race -count=1` both pass. | 7.28 |
 | 2026-11-09 | Updated Drips Wave submission packet (docs/WAVE_SUBMISSION.md) for Wave 11: confirmed 200 unit tests passing, all 16 rules registered, OpenSSF Scorecard at 6.8 with live badge, live documentation site at https://posture-sec.github.io/guage/, dynamic README metric sync, and updated sibling comparison data across org repositories. | none ticked |
 | 2026-11-09 | Finalized project naming by removing all occurrences of "working name" across repository documentation, PRD, architecture, and roadmap files. Implemented dynamic README metrics synchronization (`scripts/sync_readme.py`) generating live Shields.io endpoint JSON files under `site/data/` for 200 tests and 16 rules, and enforced with `--check` in the `roadmap-check` workflow. | none ticked |
 | 2026-11-09 | Add Docs Live badge to README and prominent navigation links to the 7-page live documentation site. | none ticked |
