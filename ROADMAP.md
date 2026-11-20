@@ -1,6 +1,6 @@
 # ROADMAP: Gauge
 
-Last updated: 2026-11-20T12:30Z (task 5.3, markdown report format with safe escaping and fenced evidence)
+Last updated: 2026-11-20T10:05Z (docs: align AGENTS.md snapshot requirement citation to FR-15)
 Roadmap version: 3
 
 This file is the single source of truth for remaining work. It is read before every task and updated after every change.
