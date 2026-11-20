@@ -53,6 +53,7 @@ guage/
       {text,domain,markdown}.go            # output and domain handling (2.5, 5.3)
       {sanitize_test,fuzz_test}.go         # injection classes, IDN, fencing; FuzzText and FuzzFenced
       {zero_width,tag_block,c1}_test.go    # per-rune boundaries of the dropped sets (7.23, 7.24, 7.25)
+      osc_test.go                          # hyperlink escapes consumed whole, URL included (7.33)
     policy/
       {config,expectations,accept}.go      # policy declarations, no decoding or acceptance logic
       {decode,validate,roles}.go           # strict loading, rejection kinds, network passphrases and the Appendix A role floors (2.4, 3.4)
