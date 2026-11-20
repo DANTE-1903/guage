@@ -1,6 +1,6 @@
 # ROADMAP: Gauge
 
-Last updated: 2026-11-20T10:05Z (task 7.34: table the bidi overrides and isolate controls)
+Last updated: 2026-11-20T10:18Z (task 7.34: table the bidi overrides and isolate controls)
 Roadmap version: 3
 
 This file is the single source of truth for remaining work. It is read before every task and updated after every change.
