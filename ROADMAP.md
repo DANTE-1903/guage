@@ -1,6 +1,6 @@
 # ROADMAP: Gauge
 
-Last updated: 2026-11-20T10:00Z (task 7.33: consume OSC 8 hyperlinks whole, URL included)
+Last updated: 2026-11-20T10:15Z (task 7.33: consume OSC 8 hyperlinks whole, URL included)
 Roadmap version: 3
 
 This file is the single source of truth for remaining work. It is read before every task and updated after every change.
